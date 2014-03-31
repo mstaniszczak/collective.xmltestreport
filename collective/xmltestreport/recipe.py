@@ -41,6 +41,10 @@ class TestRunner:
         dest = []
         eggs, ws = self.egg.working_set(
             ('zope.testing', 'zope.testrunner', 'collective.xmltestreport', ))
+        custom_eggs = options.get('custom-eggs', None)
+
+        if custom_eggs:
+            eggs = custom_eggs.split()
 
         test_paths = [ws.find(pkg_resources.Requirement.parse(spec)).location
                       for spec in eggs]
